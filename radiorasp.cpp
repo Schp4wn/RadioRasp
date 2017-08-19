@@ -13,7 +13,7 @@ int state;
 static int show_usage(string name)
 {
 	cout << "Usage: " << name << " PIN SENDER MODULE STATE" << "\n"
-	     << "Send and emit radio code with Raspberry."
+	     << "Send and emit radio signal with Raspberry."
 	     << endl;
 	return 1;
 }
@@ -55,12 +55,12 @@ int main (int argc, char* argv[])
 	state = (a4 == "on" || a4 == "1") ? 1 : 0;
 
 	if (wiringPiSetup() == -1) {
-		log("RadioRasp need WiringPi library to work.");
+		log("RadioRasp needs WiringPi library to work.");
 		return 1;
 	}
 
 	pinMode(pin, OUTPUT);
-	log("Pin " + to_string(pin) + " configuré en mode sortie");
+	log("Pin " + to_string(pin) + " configured in output mode.");
 	
 	log(itob(sender, 26) + "0" + to_string(state) + itob(module, 4));
 }
