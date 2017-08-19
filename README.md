@@ -11,13 +11,23 @@ First, you need a amazing Rasperry Pi 1, 2 or 3. You also need a radio emitter f
 You can clone the repo with git.
 
 ```
-git clone ...
+git clone https://github.com/MatthieuMota/RadioRasp.git
 ```
 
-You can compile the tool with g++
+Compile the tool
 
 ```
-g++ radiorasp.cpp -o radiorasp
+aclocal
+autoconf
+automake --add-missing
+./configure
+make
+```
+
+Install the tool
+
+```
+make install
 ```
 
 For the moment, decimal signal is simply converted to binary signal encoded in 32bits with state on/off and module.

@@ -23,6 +23,10 @@ string itob(int integer, int length) {
 
 int main (int argc, char** argv)
 {
+	if (argc != 5) {
+		cout << "Il manque des arguments. radiorasp PIN SENDER MODULE STATE." << endl;
+		return 1;
+	}
 	pin = atoi(argv[1]);
 	sender = atoi(argv[2]);
 	module = atoi(argv[3]);
