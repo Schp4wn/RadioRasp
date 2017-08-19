@@ -5,7 +5,14 @@ using namespace std;
 int pin;
 int sender;
 int module;
-string state;
+int state;
+
+static void show_usage(string name)
+{
+	cout << "Usage: " << name << " PIN SENDER MODULE STATE" << "\n"
+	     << "Send and emit radio code with Raspberry."
+	     << endl;
+}
 
 string itob(int integer, int length) {
 	string result;
@@ -21,16 +28,18 @@ string itob(int integer, int length) {
 	return result;
 }
 
-int main (int argc, char** argv)
+int main (int argc, char* argv[])
 {
 	if (argc != 5) {
-		cout << "Il manque des arguments. radiorasp PIN SENDER MODULE STATE." << endl;
+		show_usage(argv[0]);
 		return 1;
 	}
+	
 	pin = atoi(argv[1]);
 	sender = atoi(argv[2]);
 	module = atoi(argv[3]);
-	state = argv[4];
+	string a4 = argv[4];
+	state = (a4 == "on" || a4 == "1") ? 1 : 0;
 
-	cout << itob(sender, 26) << "0" << state << itob(module, 4) << endl;
+	cout << itob(sender, 26) << 0 << state << itob(module, 4) << endl;
 }

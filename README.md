@@ -37,7 +37,7 @@ Third argument is the code to identify the module.
 Last argument is the state you want to send, on (1) or off (0).
 
 ```
-./radiorasp 0 123456 0 1
+radiorasp 0 123456 0 1
 ```
 
 ## TODO
