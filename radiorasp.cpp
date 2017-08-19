@@ -1,5 +1,8 @@
 #include <iostream>
 #include <cmath>
+#include <wiringPi.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 using namespace std;
 int pin;
@@ -7,11 +10,17 @@ int sender;
 int module;
 int state;
 
-static void show_usage(string name)
+static int show_usage(string name)
 {
 	cout << "Usage: " << name << " PIN SENDER MODULE STATE" << "\n"
 	     << "Send and emit radio code with Raspberry."
 	     << endl;
+	return 1;
+}
+
+static void log(string a)
+{
+	cout << a << endl;
 }
 
 string itob(int integer, int length) {
@@ -30,9 +39,13 @@ string itob(int integer, int length) {
 
 int main (int argc, char* argv[])
 {
+	if (getuid() > 0) {
+		log("You must run this tool as root.");
+		return 1;
+	}
+
 	if (argc != 5) {
 		show_usage(argv[0]);
-		return 1;
 	}
 	
 	pin = atoi(argv[1]);
@@ -41,5 +54,13 @@ int main (int argc, char* argv[])
 	string a4 = argv[4];
 	state = (a4 == "on" || a4 == "1") ? 1 : 0;
 
-	cout << itob(sender, 26) << 0 << state << itob(module, 4) << endl;
+	if (wiringPiSetup() == -1) {
+		log("RadioRasp need WiringPi library to work.");
+		return 1;
+	}
+
+	pinMode(pin, OUTPUT);
+	log("Pin " + to_string(pin) + " configuré en mode sortie");
+	
+	log(itob(sender, 26) + "0" + to_string(state) + itob(module, 4));
 }

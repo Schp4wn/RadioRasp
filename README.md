@@ -17,17 +17,17 @@ git clone https://github.com/MatthieuMota/RadioRasp.git
 Compile the tool
 
 ```
-aclocal
-autoconf
-automake --add-missing
-./configure
+aclocal # Optional
+autoconf # Optional
+automake --add-missing # Optional
+./configure # Optional
 make
 ```
 
 Install the tool
 
 ```
-make install
+make install # Need to use autotools above
 ```
 
 For the moment, decimal signal is simply converted to binary signal encoded in 32bits with state on/off and module.
