@@ -1,5 +1,5 @@
 all:
-	g++ radiorasp.cpp -o radiorasp -lwiringPi
+	g++ -std=c++0x radiorasp.cpp -o radiorasp -lwiringPi
 
 install:
 	sudo ln -s $(PWD)/radiorasp /usr/local/bin/radiorasp

@@ -1,18 +1,17 @@
 #include <iostream>
 #include <cmath>
 #include <wiringPi.h>
-#include <sys/types.h>
 #include <unistd.h>
 
 using namespace std;
 int pin;
-int sender;
-int module;
+int identifier;
+int button;
 int state;
 
 static int show_usage(string name)
 {
-	cout << "Usage: " << name << " PIN SENDER MODULE STATE" << "\n"
+	cout << "Usage: " << name << " pin identifier button state" << "\n"
 	     << "Send and emit radio signal with Raspberry."
 	     << endl;
 	return 1;
@@ -49,8 +48,8 @@ int main (int argc, char* argv[])
 	}
 	
 	pin = atoi(argv[1]);
-	sender = atoi(argv[2]);
-	module = atoi(argv[3]);
+	identifier = atoi(argv[2]);
+	button = atoi(argv[3]);
 	string a4 = argv[4];
 	state = (a4 == "on" || a4 == "1") ? 1 : 0;
 
@@ -62,5 +61,5 @@ int main (int argc, char* argv[])
 	pinMode(pin, OUTPUT);
 	log("Pin " + to_string(pin) + " configured in output mode.");
 	
-	log(itob(sender, 26) + "0" + to_string(state) + itob(module, 4));
+	log(itob(identifier, 26) + "0" + to_string(state) + itob(button, 4));
 }
